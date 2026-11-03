@@ -1,0 +1,11 @@
+/bin/
+/runtime/
+/data/
+/logs/
+/server.yaml
+/agent.yaml
+/*.crt
+/*.key
+*.db
+*.db-wal
+*.db-shm

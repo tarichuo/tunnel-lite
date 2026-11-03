@@ -1,0 +1,31 @@
+# Use tunnel-server -init to generate real certificates and a random admin Token.
+server:
+  api_host: 127.0.0.1
+  api_port: 7000
+  api_https: false
+  control_host: ""
+  control_port: 7001
+  public_host: 1.2.3.4
+  admin_token: "REPLACE_WITH_A_RANDOM_TOKEN_OF_AT_LEAST_24_CHARACTERS"
+  tls_cert: server.crt
+  tls_key: server.key
+  ca_cert: ca.crt
+port_pool:
+  start: 10000
+  end: 20000
+heartbeat:
+  interval: 15
+  timeout: 45
+database:
+  path: data/tunnel.db
+logs:
+  path: logs/tunnel.log
+  max_size_mb: 5
+  backups: 3
+limits:
+  agent_tunnels: 20
+  tunnel_connections: 64
+  total_connections: 256
+  pair_timeout: 10
+  log_days: 30
+  log_entries: 10000

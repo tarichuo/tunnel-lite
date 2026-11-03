@@ -1,0 +1,8 @@
+# Prefer the real configuration downloaded from the Web onboarding flow.
+server: "1.2.3.4:7001"
+agent_id: "agent_FROM_THE_WEB_CONSOLE"
+name: "my-server"
+token: "TOKEN_SHOWN_ONCE_DURING_CREATION"
+ca_cert: "./ca.crt"
+allowed_targets:
+  - "127.0.0.1"

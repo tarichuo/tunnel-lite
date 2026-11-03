@@ -1,0 +1,24 @@
+[Unit]
+Description=Tunnel Lite Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tunnel
+Group=tunnel
+WorkingDirectory=/opt/tunnel-lite
+ExecStart=/opt/tunnel-lite/tunnel-server -c /opt/tunnel-lite/runtime/server.yaml
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/tunnel-lite/runtime
+UMask=0077
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tunnel Lite · TCP 映射管理</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <section id="login" class="login-wrap" hidden>
+      <form id="login-form" class="login-card">
+        <div class="brand-mark">TL</div>
+        <h1>Tunnel Lite</h1>
+        <p class="muted">连接本地服务与公网。</p>
+        <label
+          >管理 Token<input
+            id="login-token"
+            type="password"
+            autocomplete="current-password"
+            required /></label
+        ><label class="check"
+          ><input id="show-token" type="checkbox" />显示 Token</label
+        >
+        <p id="login-error" class="error" role="alert"></p>
+        <button class="primary" type="submit">登录管理台</button>
+        <p class="hint">使用服务器配置中的 admin_token 登录。</p>
+      </form>
+    </section>
+    <div id="console" hidden>
+      <header>
+        <a href="#tunnels" class="brand"
+          ><span class="brand-mark small">TL</span>Tunnel Lite</a
+        >
+        <div class="header-meta">
+          <span id="server-label"></span><span id="updated" class="muted"></span
+          ><button id="logout" class="quiet">退出</button>
+        </div>
+      </header>
+      <div class="layout">
+        <nav aria-label="主导航">
+          <p class="nav-label">工作空间</p>
+          <a href="#tunnels" id="nav-tunnels">端口映射 <span>↗</span></a
+          ><a href="#agents" id="nav-agents">Agent <span>◉</span></a>
+          <div class="nav-note">
+            轻量 TCP 隧道<br /><span>简单连接，可靠转发。</span>
+          </div>
+        </nav>
+        <main>
+          <div id="stale" class="banner error" role="alert" hidden></div>
+          <div id="stats" class="stats"></div>
+          <section class="panel">
+            <div class="page-heading">
+              <div>
+                <p class="eyebrow">TUNNEL LITE / WORKSPACE</p>
+                <h1 id="page-title">端口映射</h1>
+                <p id="page-desc" class="muted">
+                  将本地 TCP 服务安全连接至公网入口。
+                </p>
+              </div>
+              <div class="actions">
+                <button id="refresh">刷新</button
+                ><button id="primary-action" class="primary">
+                  ＋ 创建映射
+                </button>
+              </div>
+            </div>
+            <div id="filters" class="filters">
+              <input
+                id="search"
+                type="search"
+                placeholder="搜索名称、Agent 或地址"
+                aria-label="搜索映射"
+              /><select id="status-filter" aria-label="筛选状态">
+                <option value="">有效及异常记录</option>
+                <option value="ALL">全部状态</option>
+                <option value="ACTIVE">运行中</option>
+                <option value="STARTING">启动中</option>
+                <option value="OFFLINE">Agent 已断开</option>
+                <option value="ERROR">启动或恢复失败</option>
+                <option value="STOPPED">已下线</option></select
+              ><select id="agent-filter" aria-label="筛选 Agent">
+                <option value="">全部 Agent</option>
+              </select>
+            </div>
+            <div id="list" aria-live="polite"></div>
+            <div id="pagination" class="pagination"></div>
+          </section>
+          <footer>
+            TCP ONLY <span>·</span> 控制与数据通道均使用 TLS <span>·</span> 每 5
+            秒更新
+          </footer>
+        </main>
+      </div>
+    </div>
+    <dialog id="drawer" class="drawer" aria-labelledby="drawer-title">
+      <div class="dialog-top">
+        <h2 id="drawer-title"></h2>
+        <button data-action="close-drawer" aria-label="关闭">✕</button>
+      </div>
+      <div id="drawer-body"></div>
+    </dialog>
+    <dialog id="confirm" class="confirm" aria-labelledby="confirm-title">
+      <h2 id="confirm-title"></h2>
+      <div id="confirm-body"></div>
+    </dialog>
+    <div id="toast" role="status" hidden></div>
+  </body>
+</html>
